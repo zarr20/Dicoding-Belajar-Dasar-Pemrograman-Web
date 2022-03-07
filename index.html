@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <style>
+            body {
+                margin: 0;
+                min-height: 100vh;
+    
+                display: flex;
+                flex-direction: column;
+            }
+            footer {
+                margin-top: auto !important;
+                text-align: center;
+            }
+            .container {
+                margin: 0 auto;
+                padding: 20px 0;
+                max-width: 1200px;
+                width: 100%;
+            }
+            nav ul {
+                padding-left: 0;
+                list-style: none;
+                font-size: 3rem;
+                margin-bottom: 0;
+                margin-top: 0;
+                text-align: center;
+            }
+            nav li {
+                display: inline-block;
+                margin-right: 20px;
+                margin-bottom: 20px;
+            }
+    
+            .profile-photo {
+                width: fit-content;
+                border-radius: 99999px;
+                overflow: hidden;
+                margin-bottom: 2rem;
+            }
+            .flex {
+                display: flex;
+            }
+        </style>
+    </head>
+    <body>
+        <header class="container flex">
+            <div style="margin-right: auto;">
+                <h1 style="margin: 0;">
+                    Dzarr
+                </h1>
+                <p style="margin: 0;">Halaman Portofolio</p>
+            </div>
+         
+            <nav>
+                <ul>
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="https://github.com/zarr20">Github</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main class="container flex">
+            <div id="content" style="width: 80%;">
+                <article>
+                    <div>
+                        <h2>Hello,</h2>
+                        <p>I am a Web developer with industry experience building websites and web applications. I specialize in PHP Native/Framework , Typescript, JavaScript , CSS , and i like UI/UX Design, Analyze Data. Always seeking for an opportunity to apply my knowledge and skills for continuous improvement.</p> 
+                    </div>
+                </article>
+          
+                <div id="gitproject" style=" display: inline-block; ">
+                <!-- isi article ada disini -->
+                </div>
+            </div>
+            <aside style="width: fit-content">
+                <div class="profile-photo">
+                    <img src="https://raw.githubusercontent.com/zarr20/portofolio-dzarr/main/dzarr-foto.png" style=" margin-bottom: -5px; ">
+                </div>
+                <div>   
+                    <p>
+                        <b>Name</b> : Dzarr al ghifari </br>
+                        <b>Date of Brith</b> : Bogor, 20 January 2000</br>
+                        <b>Religion</b> : Islam</br>
+                        <b>Phone</b> : 0812 8594 9903</br>
+                        <b>Email</b> : zarralghifari@gmail.com</br>
+                    </p>
+                </div>
+            </aside>
+        </main>
+        <footer class="container">
+            <p>Dzarr al ghifari | Tugas Akhir Membuat Website - Belajar Dasar Pemrograman
+                Web</p>
+            
+        </footer>
+    
+        
+        <script>
+            function getGithub_Repo(data) {
+                $.ajax({
+                    url: 'https://api.github.com/users/zarr20/repos',
+                    type: 'GET',
+                    dataType: 'json',
+                    async: false,
+                }).done(function (response) {
+                    data = response;
+                });
+                return data;
+            }
+    
+            var gihubProject = "";
+    
+            getGithub_Repo().forEach((item) => {
+    
+                var html = '<article >' +
+                    '<div >' +
+                    '<h2 >' +
+                    item.name +
+                    '</h2>' +
+                    '<p>' +
+                    item.description +
+                    '</p>' +
+                    '<a href="' +
+                    item.html_url +
+                    '" >Show</a>' +
+                    '</div>' +
+                    '</article>';
+    
+                gihubProject = gihubProject + html;
+            });
+    
+            document.getElementById('gitproject').innerHTML = gihubProject;
+    
+            console.log(getGithub_Repo());
+        </script>
+    </body>
+    
+</html>
